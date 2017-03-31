@@ -1,0 +1,17 @@
+{
+    "movies": [
+        {
+            "id": 1,
+            "name": "The Terminator"
+        },
+        {
+            "id": 2,
+            "name": "Interstellar",
+            "year": 2014
+        },
+        {
+            "id": 3,
+            "name": "Titanic"
+        }
+    ]
+}

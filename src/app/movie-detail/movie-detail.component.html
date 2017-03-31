@@ -1,0 +1,35 @@
+<div *ngIf="movie">
+  <h2>
+    Movie Details
+  </h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{movie.id}}</td>
+        <td>{{movie.name}}</td>
+        <td>{{movie.year}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <table class="navtable">
+    <tbody>
+      <tr>
+        <td>
+          <a *ngIf="previousMovie" [routerLink]="['/movies', previousMovie.id]">previous movie ({{previousMovie.name}})</a>
+        </td>
+        <td><a routerLink="/movies">back to movie list</a></td>
+        <td>
+          <a *ngIf="nextMovie" [routerLink]="['/movies', nextMovie.id]">next movie ({{nextMovie.name}})</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

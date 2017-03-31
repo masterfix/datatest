@@ -1,0 +1,8 @@
+.navtable {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.navtable td {
+    width: 33%;
+}

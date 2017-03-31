@@ -1,0 +1,17 @@
+<h2>
+  Movie List
+</h2>
+<table border="1" *ngIf="movies">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of movies">
+      <td>{{movie.id}}</td>
+      <td><a [routerLink]="['/movies', movie.id]">{{movie.name}}</a></td>
+    </tr>
+  </tbody>
+</table>
