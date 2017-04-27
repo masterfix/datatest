@@ -1,7 +1,10 @@
 import { Router, RoutesRecognized } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs/Observable";
-import { ReplaySubject } from "rxjs/ReplaySubject";
+import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import 'rxjs/add/observable/defer';
+import 'rxjs/add/operator/publishReplay';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class CacheService {
@@ -10,9 +13,9 @@ export class CacheService {
 
     constructor(router: Router) {
         router.events.subscribe(event => {
-            //console.log("router event:", event);
+            // console.log("router event:", event);
             if (event instanceof RoutesRecognized) {
-                //console.log("detected page change! resetting service cache");
+                // console.log("detected page change! resetting service cache");
                 this.clear();
             }
         });
@@ -20,16 +23,15 @@ export class CacheService {
 
     public cacheable<T>(returnObservable: () => Observable<T>, key?: string): Observable<T> {
         if (!!key && this.cache.has(key)) {
+            console.log("returning observable from cache with key", key);
             return this.cache.get(key) as Observable<T>;
         }
-        let replay = new ReplaySubject<T>(1);
-        returnObservable().subscribe(
-            x => replay.next(x),
-            x => replay.error(x),
-            () => replay.complete()
-        );
-        let observable = replay.asObservable();
+        console.log("creating a new observable...");
+        const observable = Observable.defer(() => returnObservable().do(() => {
+            console.log("executing low level observable...");
+        })).publishReplay(1).refCount();
         if (!!key) {
+            console.log("put observable into cache with key", key);
             this.cache.set(key, observable);
         }
         return observable;

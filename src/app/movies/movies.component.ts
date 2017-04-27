@@ -15,6 +15,52 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
 
+    /*
+    let obs1 = this.movieService.getMovies();
+    let obs2 = this.movieService.getMovies();
+    let obs3 = this.movieService.getMovies();
+
+    setTimeout(() => {
+      console.log("timeout 1");
+
+      obs1.subscribe(movies => {
+      console.log("#2 got movies from service:", movies);
+
+      setTimeout(() => {
+        console.log("timeout 2");
+          
+        obs2.subscribe(movies => {
+          console.log("#2 got movies from service:", movies);
+        });
+
+        this.movieService.getMovies().subscribe(movies => {
+          console.log("#2.1 got movies from service:", movies);
+        });
+
+        setTimeout(() => {
+          console.log("timeout 3");
+
+          this.movieService.clearCache();
+
+          obs2.subscribe(movies => {
+            console.log("#22 got movies from service:", movies);
+          });
+
+          this.movieService.getMovies().subscribe(movies => {
+            console.log("#4 got movies from service:", movies);
+          }, error => console.error(error), () => console.log("completed"));
+
+        }, 5000);
+
+      }, 5000);
+
+    });
+
+    }, 5000);
+    */
+
+    
+    
     this.movieService.getMovies().subscribe(movies => {
       console.log("#1 got movies from service:", movies);
       this.movies = movies;
@@ -31,6 +77,8 @@ export class MoviesComponent implements OnInit {
     this.movieService.getMovies().subscribe(movies => {
       console.log("#3 got movies from service:", movies);
     });
+    
+    
 
   }
 

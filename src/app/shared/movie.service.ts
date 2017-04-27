@@ -34,4 +34,8 @@ export class MovieService {
     }, "getMovie" + id);
   }
 
+  public clearCache() {
+    this.cache.clear();
+  }
+
 }
