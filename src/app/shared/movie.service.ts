@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import { Http } from "@angular/http";
+import { Http, Headers, RequestOptions } from "@angular/http";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -34,8 +34,20 @@ export class MovieService {
     }, "getMovie" + id);
   }
 
+  public updateMovie(movie: Movie): Observable<boolean> {
+    const data = JSON.stringify(movie);
+    return this.http.put(BASE_URL + "/movies/" + movie.id, data, MovieService.getRequestOptionsJson()).map(response => {
+      return true;
+    });
+  }
+
   public clearCache() {
     this.cache.clear();
+  }
+
+  private static getRequestOptionsJson(): RequestOptions {
+    const headers = new Headers({'Accept': 'application/json', 'Content-Type': 'application/json'});
+    return new RequestOptions({headers: headers});
   }
 
 }

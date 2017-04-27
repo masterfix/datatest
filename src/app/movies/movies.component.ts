@@ -68,6 +68,14 @@ export class MoviesComponent implements OnInit {
 
     this.movieService.getMovie(2).subscribe(movie => {
       console.log("got single movie:", movie);
+
+      movie.name = "Passengers";
+      movie.year = 2016;
+
+      this.movieService.updateMovie(movie).subscribe(success => {
+        console.log("movie has been updated...");
+      })
+
     });
 
     this.movieService.getMovies().subscribe(movies => {
@@ -79,6 +87,7 @@ export class MoviesComponent implements OnInit {
     });
     
     
+
 
   }
 
